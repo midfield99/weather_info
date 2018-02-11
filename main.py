@@ -1,11 +1,16 @@
+import os
 import requests
 
-API_KEY = FAKE_KEY
-#api.openweathermap.org/data/2.5/weather?q={city name}
-BASE_URL='http://api.openweathermap.org/data/2.5/weather?q={}&appid={}'
+def get_api_response(city):
+    api_key = os.environ.get('OWM_API_KEY')
+    base_url = os.environ.get('OWM_BASE_URL')
 
-good_response_text='{"coord":{"lon":-93.6,"lat":41.59},"weather":[{"id":801,"main":"Clouds","description":"few clouds","icon":"02d"}],"base":"stations","main":{"temp":266.05,"pressure":1020,"humidity":57,"temp_min":265.15,"temp_max":267.15},"visibility":16093,"wind":{"speed":5.1,"deg":250},"clouds":{"all":20},"dt":1518380100,"sys":{"type":1,"id":865,"message":0.0039,"country":"US","sunrise":1518354822,"sunset":1518392646},"id":4853828,"name":"Des Moines","cod":200}'
-bad_response_text='{"cod":"404","message":"city not found"}'
+    if not api_key or not base_url or api_key =='FAKE_KEY':
+        err = "Environmental variable retrieval failed. Was the API key set and config file sourced?"
+        raise SystemExit(err)
 
-bad_response = requests.get(BASE_URL.format('DesMoines', API_KEY))
-good_response = requests.get(BASE_URL.format('Des Moines', API_KEY))
+    url = base_url + 'weather?q={}&appid={}'.format(city, api_key)
+    return requests.get(url)
+
+bad_response = get_api_response('DesMoines')
+good_response = get_api_response('Des Moines')
