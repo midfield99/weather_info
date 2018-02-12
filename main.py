@@ -1,6 +1,12 @@
 import os
 import requests
 
+def validate_json_response(res):
+    code = str(res.get('cod')) #I've seen both number response codes and string response code from this api.
+    if code != '200':
+        err = "Api call unsuccessful. Code: {} Error Message: {}"
+        raise LookupError(err.format(code, res.get("message")))
+
 def get_api_response(city):
     api_key = os.environ.get('OWM_API_KEY')
     base_url = os.environ.get('OWM_BASE_URL')
@@ -10,7 +16,7 @@ def get_api_response(city):
         raise SystemExit(err)
 
     url = base_url + 'weather?q={}&appid={}'.format(city, api_key)
-    return requests.get(url)
+    response = requests.get(url).json()
+    validate_json_response(response)
 
-bad_response = get_api_response('DesMoines')
-good_response = get_api_response('Des Moines')
+    return response
