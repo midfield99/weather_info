@@ -1,0 +1,13 @@
+#Directories to ignore, mainly from venv
+share/
+lib*
+include/
+bin/
+
+__pycache__/
+
+#files
+pyvenv.cfg
+pip-selfcheck.json
+#don't track files with private keys
+config.sh
