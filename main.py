@@ -54,7 +54,7 @@ def validate_input(city):
 # 
 # using a zip code to retrieve temperatures would probably be much more accurate.
 def retrieve_temp():
-    city = input("What city are you?\n")
+    city = input("What city are you in?\n")
     validate_input(city)
     res = get_api_response(city)
     temp = res.get('main', {}).get('temp')
