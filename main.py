@@ -39,8 +39,9 @@ def get_api_response(city):
 #
 # I'm also not implementing spell check.
 def validate_input(city):
-    if not city.replace(' ','').isalpha():
-        msg = "City is invalid. Please only use letters and spaces in city name."
+    place = city.replace(' ','').replace('-','')
+    if not place.isalpha():
+        msg = "City is invalid. Only letters, spaces, and '-' are allowed."
         raise ValueError(msg)
 
 #Note, the state is intentionally ignored.

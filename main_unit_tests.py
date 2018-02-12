@@ -63,11 +63,11 @@ class TestMain(unittest.TestCase):
 
 
     def test_validate_bad_input(self):
-        bad = '!@#$%^&*()_+-=`~[]:";<>,.12345667890'
-        err = "City is invalid. Please only use letters and spaces in city name."
+        bad = '!@#$%^&*()_+=`~[]:";<>,.12345667890'
+        err = "City is invalid. Only letters, spaces, and '-' are allowed."
 
         for b in bad:
-            self.assertRaisesRegex(ValueError, err, main.validate_input, b)
+            self.assertRaisesRegex(ValueError, err, main.validate_input, 'city' + b)
 
     @patch('main.requests.get')
     @patch('main.input')
