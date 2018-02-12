@@ -1,3 +1,7 @@
+Status
+=====
+Travis-CI: [![Build Status](https://travis-ci.org/midfield99/weather_info.png)](https://travis-ci.org/midfield99/weather_info)
+
 Set Up
 =====
 This program was developed with Python 3.6
