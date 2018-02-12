@@ -48,8 +48,5 @@ class TestMain(unittest.TestCase):
         err +="Was the API key set and config file sourced?"
         self.assertRaisesRegex(SystemExit, err, main.get_api_response, "Ames")
 
-    def test_fail(self):
-        self.assertTrue(False)
-
 if __name__ == '__main__':
     unittest.main()
